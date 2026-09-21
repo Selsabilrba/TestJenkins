@@ -1,1 +1,26 @@
+name: Tests API Newman
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  newman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer Newman
+        run: npm install -g newman
+
+      - name: Exécuter la collection Postman
+        run: newman run TestJenkis.postman_collection.json
