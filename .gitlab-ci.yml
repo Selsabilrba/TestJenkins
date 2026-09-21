@@ -1,0 +1,24 @@
+image: node:22
+
+stages:
+  - test
+
+newman_tests:
+  stage: test
+
+  before_script:
+    - npm install -g newman
+    - npm install -g newman-reporter-htmlextra
+    - mkdir -p reports
+
+  script:
+    - >
+      newman run TestJenkis.postman_collection.json
+      --reporters cli,htmlextra
+      --reporter-htmlextra-export reports/newman-report.html
+
+  artifacts:
+    when: always
+    paths:
+      - reports/newman-report.html
+    expire_in: 7 days
