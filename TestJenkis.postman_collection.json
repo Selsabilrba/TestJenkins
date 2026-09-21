@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "5b10c01a-1760-4dcd-86fc-2c20a37eb1e8",
+    "name": "rapport",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58336523",
+    "_collection_link": "https://go.postman.co/collection/58336523-5b10c01a-1760-4dcd-86fc-2c20a37eb1e8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "get",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is less than 500ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Content-Type is JSON\", function () {\r",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+              "        .to.include(\"application/json\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://695bcf701d8041d5eeb88ad5.mockapi.io/testapi/api/v1/users",
+          "protocol": "https",
+          "host": [
+            "695bcf701d8041d5eeb88ad5",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Content-Type is JSON\", function () {\r",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+              "        .to.include(\"application/json\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains an id\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response).to.have.property(\"id\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Firstname is correct\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response.firstname).to.eql(\"Thomas\");\r",
+              "});\r",
+              "\r",
+              "pm.test.skip(\"Lastname is correct\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response.lastname).to.eql(\"Dupont\");\r",
+              "});\r",
+              "\r",
+              "pm.test.skip(\"City is correct\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response.address.city).to.eql(\"Paris\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"lastname\": \"Dupont\",\r\n    \"firstname\": \"Thomas\",\r\n    \"address\": {\r\n        \"numStreet\": 20,\r\n        \"streetName\": \"Rue de Paris\",\r\n        \"postalCode\": \"75001\",\r\n        \"city\": \"Paris\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://695bcf701d8041d5eeb88ad5.mockapi.io/testapi/api/v1/users",
+          "protocol": "https",
+          "host": [
+            "695bcf701d8041d5eeb88ad5",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "testapi",
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
